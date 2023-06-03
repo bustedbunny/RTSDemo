@@ -2,4 +2,4 @@
 
 Simple tank multiplayer educational project.
 
-Click on tank to enable wasd + mouse controls. Click anywhere else to disable controls.
+Click on tank to select. Right click to move it. Only player controlled units can be controlled.
