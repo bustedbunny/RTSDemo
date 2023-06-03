@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements"
+         xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements"
+         noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Settings/UI%20Toolkit/Styles/Window.uss?fileID=7433441132597879392&amp;guid=37ece9989873401d94403b64124ee3a6&amp;type=3#Window"/>
+    <ui:VisualElement class="fullscreen container-center">
+        <ui:VisualElement class="window" style="width: 50%; height: 50%;">
+            <ui:TextField picking-mode="Ignore" label="Connect address" value="127.0.0.1"
+                          keyboard-type="NumbersAndPunctuation" max-length="15">
+                <ui:TextField picking-mode="Ignore" max-length="5" keyboard-type="NumberPad" value="7979"
+                              style="width: 10%;" view-data-key="{%Port}"/>
+                <ui:Button text="Connect" view-data-key="{@ClientConnect}"/>
+            </ui:TextField>
+            <ui:Button text="Start lobby" view-data-key="{@LobbyServer}"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

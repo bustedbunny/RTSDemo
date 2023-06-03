@@ -1,0 +1,8 @@
+@import url("UnityDefaultRuntimeTheme.tss");
+
+@import url("/Packages/com.bustedbunny.mvvmtoolkit/Runtime/Resources/MVVMTKDefault.uss");
+@import url("/Assets/Settings/UI Toolkit/Styles/Base.uss");
+@import url("/Assets/Settings/UI Toolkit/Styles/Window.uss");
+
+
+VisualElement {}

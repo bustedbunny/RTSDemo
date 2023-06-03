@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements"
+         xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements"
+         noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement class="fullscreen container-center">
+        <ui:VisualElement class="window" style="width: 50%; height: 50%;">
+            <ui:Button name="button-start" text="Start Match" view-data-key="{@StartGame}"/>
+            <ui:VisualElement name="list-player"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

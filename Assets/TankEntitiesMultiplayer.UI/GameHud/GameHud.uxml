@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements"
+         xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements"
+         noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement class="fullscreen">
+        <ui:VisualElement style="position: absolute; bottom: 0; width: 100%; height: 15%;">
+            <ui:VisualElement style="position: absolute; left: 0; width: 20%; height: 100%;">
+                <ui:Button text="Escape" style="flex-grow: 1;" view-data-key="{@Menu}"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

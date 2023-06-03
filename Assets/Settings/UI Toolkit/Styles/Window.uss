@@ -1,0 +1,19 @@
+.window {
+    border-left-color: rgb(37, 104, 128);
+    border-right-color: rgb(37, 104, 128);
+    border-top-color: rgb(37, 104, 128);
+    border-bottom-color: rgb(37, 104, 128);
+    border-left-width: 10px;
+    border-right-width: 10px;
+    border-top-width: 10px;
+    border-bottom-width: 10px;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    background-color: rgb(51, 126, 137);
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}

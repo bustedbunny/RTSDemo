@@ -1,0 +1,34 @@
+{
+  "name": "TankEntitiesMultiplayer.Authoring",
+  "rootNamespace": "",
+  "references": [
+    "BovineLabs.Core",
+    "BovineLabs.Core.Authoring",
+    "BovineLabs.Core.Extensions",
+    "BovineLabs.Core.Extensions.Authoring",
+    "TankEntitiesMultiplayer.Data",
+    "Unity.Burst",
+    "Unity.Collections",
+    "Unity.Entities",
+    "Unity.Entities.Hybrid",
+    "Unity.InputSystem",
+    "Unity.Logging",
+    "Unity.Mathematics",
+    "Unity.NetCode",
+    "Unity.Networking.Transport",
+    "Unity.Physics",
+    "Unity.Transforms",
+    "Unity.Scenes"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": true,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [
+    "UNITY_EDITOR"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
