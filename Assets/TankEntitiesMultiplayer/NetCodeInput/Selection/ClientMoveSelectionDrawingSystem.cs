@@ -1,5 +1,6 @@
 ﻿using TankEntitiesMultiplayer.Data;
 using TankEntitiesMultiplayer.Data.Tank;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
@@ -21,6 +22,7 @@ namespace TankEntitiesMultiplayer.NetCodeInput.Selection
             state.EntityManager.Instantiate(references.selectionPrefab);
         }
 
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var selectionEntity = SystemAPI.GetSingletonEntity<UnitSelection>();
