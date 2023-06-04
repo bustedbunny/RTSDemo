@@ -250,6 +250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 512080625}
+  - component: {fileID: 512080627}
   - component: {fileID: 512080624}
   - component: {fileID: 512080623}
   - component: {fileID: 512080626}
@@ -345,6 +346,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53095e826a264b16a7bf580124527c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &512080627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512080622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5e0508e41f459882da7bff513e3dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsTemplate: {fileID: 11400000, guid: c6c1bb4ac646bf94baae1e9b2c10988d, type: 2}
 --- !u!1 &937672007
 GameObject:
   m_ObjectHideFlags: 0
