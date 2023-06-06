@@ -58,7 +58,7 @@ namespace TankEntitiesMultiplayer.NetCodeCamera
 
 
             float3 playerPos = _playerTransform.localPosition;
-            float3 cameraPos = _mainCamera.transform.position;
+            var cameraPos = playerPos + new float3(0, 15f, -10f);
 
             var cameraDelta = cameraPos - playerPos;
 
