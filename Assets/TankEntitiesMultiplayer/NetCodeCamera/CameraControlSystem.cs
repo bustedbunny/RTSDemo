@@ -11,8 +11,7 @@ namespace TankEntitiesMultiplayer.NetCodeCamera
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     public partial class CameraControlSystem : SystemBase
     {
-        private Vector3 _origin;
-        private float _dragSpeed = 15f;
+        private float _dragSpeed = 10f;
         private Vector3 _originPosition;
 
         private Camera _mainCamera;
@@ -34,20 +33,20 @@ namespace TankEntitiesMultiplayer.NetCodeCamera
         private void HandleDrag(LocalClientInput input)
         {
             var playerTransform = PlayerTransform.Instance.transform;
-            if (input.mmbDown)
+
+            if (input.dragStarted)
             {
-                _origin = Input.mousePosition;
                 _originPosition = playerTransform.position;
                 return;
             }
 
-            if (!input.mmbPress) return;
+            if (!input.draggingCamera) return;
 
-            var pos = _mainCamera.ScreenToViewportPoint(Input.mousePosition - _origin);
-            var move = new Vector3(pos.x * _dragSpeed, 0f, pos.y * _dragSpeed) *
-                       math.max(1f, playerTransform.position.y / 10f);
-            var position = _originPosition - move;
-            playerTransform.position = position;
+            var curPosition = playerTransform.position;
+
+            var pos = _mainCamera.ScreenToViewportPoint((Vector2)input.dragDelta);
+            var move = -_dragSpeed * math.max(3f, curPosition.y / 5f) * new Vector3(pos.x, 0f, pos.y);
+            playerTransform.Translate(move);
         }
 
         private void HandleZoom()

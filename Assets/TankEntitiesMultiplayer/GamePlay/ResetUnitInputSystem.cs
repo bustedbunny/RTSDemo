@@ -4,6 +4,7 @@ using Unity.Entities;
 
 namespace TankEntitiesMultiplayer.GamePlay
 {
+    [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
     public partial struct ResetUnitInputSystem : ISystem
     {
         [BurstCompile]
@@ -11,7 +12,9 @@ namespace TankEntitiesMultiplayer.GamePlay
         {
             foreach (var unitInputRef in SystemAPI.Query<RefRW<UnitInput>>())
             {
-                unitInputRef.ValueRW = default;
+                ref var input = ref unitInputRef.ValueRW;
+                input.horizontal = 0;
+                input.vertical = 0;
             }
         }
     }

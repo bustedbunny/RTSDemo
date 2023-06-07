@@ -21,7 +21,6 @@
     "Unity.Entities.Graphics",
     "Unity.Scenes",
     "NativeMessenger",
-    "ALINE",
     "UniTask",
     "com.bustedbunny.mvvmtoolkit",
     "Pathfinding"

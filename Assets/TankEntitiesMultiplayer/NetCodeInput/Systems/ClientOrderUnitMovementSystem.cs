@@ -1,6 +1,7 @@
 ﻿using Pathfinding.Components;
 using TankEntitiesMultiplayer.Bootstrap;
 using TankEntitiesMultiplayer.Data;
+using TankEntitiesMultiplayer.Data.Tank;
 using TankEntitiesMultiplayer.NetCodeInput.Data;
 using Unity.Burst;
 using Unity.Entities;
@@ -23,7 +24,7 @@ namespace TankEntitiesMultiplayer.NetCodeInput.Systems
         {
             var localInput = LocalClientInput.Get;
 
-            if (!localInput.rmbDown)
+            if (!localInput.action)
             {
                 return;
             }
@@ -51,12 +52,24 @@ namespace TankEntitiesMultiplayer.NetCodeInput.Systems
 
                 if (pws.CastRay(raycastInput, out var hit))
                 {
-                    var lt = SystemAPI.GetComponent<LocalTransform>(selection.entity);
-                    input.from = lt.Position;
-                    input.to = hit.Position;
-                    input.moveUnit.Set();
-                    input.unitToMove = selection.entity;
-                    SystemAPI.GetComponentRW<Pathfinder>(selection.entity).ValueRW.to = hit.Position;
+                    // order to attack enemy
+                    if (SystemAPI.HasComponent<ControllableUnit>(hit.Entity))
+                    {
+                        input.orderType = Order.Attack;
+                        input.controlledUnit = selection.entity;
+                        input.unitToAttack = hit.Entity;
+                        input.order.Set();
+                    }
+                    else
+                    {
+                        input.orderType = Order.Move;
+                        var lt = SystemAPI.GetComponent<LocalTransform>(selection.entity);
+                        input.from = lt.Position;
+                        input.to = hit.Position;
+                        input.order.Set();
+                        input.controlledUnit = selection.entity;
+                        SystemAPI.GetComponentRW<Pathfinder>(selection.entity).ValueRW.to = hit.Position;
+                    }
                 }
             }
         }

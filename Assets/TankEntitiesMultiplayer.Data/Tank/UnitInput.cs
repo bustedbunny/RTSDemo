@@ -8,8 +8,9 @@ namespace TankEntitiesMultiplayer.Data.Tank
         public int horizontal;
         public int vertical;
 
-        public float3 aimOrigin;
-        public float3 aimDirection;
+        public bool hasTarget;
+        public Entity enemy;
+        public float3 lookPosition;
 
         public bool shoot;
     }

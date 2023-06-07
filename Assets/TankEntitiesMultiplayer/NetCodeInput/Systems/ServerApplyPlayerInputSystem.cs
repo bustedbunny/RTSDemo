@@ -30,8 +30,8 @@ namespace TankEntitiesMultiplayer.NetCodeInput.Systems
                 if (SystemAPI.HasComponent<UnitInput>(playerInput.selectedEntity))
                 {
                     ref var tankInput = ref SystemAPI.GetComponentRW<UnitInput>(playerInput.selectedEntity).ValueRW;
-                    tankInput.aimDirection = playerInput.aimDirection;
-                    tankInput.aimOrigin = playerInput.aimOrigin;
+                    // tankInput.aimDirection = playerInput.aimDirection;
+                    // tankInput.aimOrigin = playerInput.aimOrigin;
                     tankInput.horizontal = playerInput.horizontal;
                     tankInput.vertical = playerInput.vertical;
                     tankInput.shoot = playerInput.shoot.IsSet;

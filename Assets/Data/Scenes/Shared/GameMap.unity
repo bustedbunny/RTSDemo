@@ -250,10 +250,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 512080625}
-  - component: {fileID: 512080627}
   - component: {fileID: 512080624}
   - component: {fileID: 512080623}
   - component: {fileID: 512080626}
+  - component: {fileID: 512080627}
   m_Layer: 0
   m_Name: Terrain (1)
   m_TagString: Untagged

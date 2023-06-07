@@ -20,15 +20,12 @@ namespace TankEntitiesMultiplayer.NetCodeInput.Systems
             var down = localInput.s;
             var up = localInput.w;
 
-            var click = localInput.lmbDown;
-            var shoot = localInput.rmbDown;
-
             var ray = localInput.cameraCursorRay;
             var cw = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
 
 
             var mouseoverEntity = Entity.Null;
-            if (click)
+            if (localInput.select)
             {
                 var raycastInput = new RaycastInput
                 {
@@ -59,7 +56,7 @@ namespace TankEntitiesMultiplayer.NetCodeInput.Systems
                 input.aimOrigin = default;
                 input.aimDirection = default;
                 input.shoot = default;
-                input.moveUnit = default;
+                input.order = default;
 
                 input.horizontal = left ? input.horizontal - 1 : input.horizontal;
                 input.horizontal = right ? input.horizontal + 1 : input.horizontal;
@@ -69,7 +66,7 @@ namespace TankEntitiesMultiplayer.NetCodeInput.Systems
                 input.aimOrigin = ray.origin;
                 input.aimDirection = ray.direction;
 
-                if (shoot)
+                if (localInput.action)
                 {
                     input.shoot.Set();
                 }

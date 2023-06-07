@@ -1,6 +1,7 @@
 ﻿using Pathfinding.Aspects;
 using Pathfinding.Components;
 using TankEntitiesMultiplayer.Data;
+using TankEntitiesMultiplayer.Data.Tank;
 using Unity.Burst;
 using Unity.Entities;
 
@@ -14,24 +15,45 @@ namespace TankEntitiesMultiplayer.NetCodeInput.Systems
         {
             foreach (var (playerInput, id) in SystemAPI.Query<PlayerInput, PlayerId>())
             {
-                if (!playerInput.moveUnit.IsSet)
+                if (!playerInput.order.IsSet)
                 {
                     continue;
                 }
 
-                if (!SystemAPI.HasComponent<Pathfinder>(playerInput.unitToMove))
-                {
-                    continue;
-                }
-
-                var unit = SystemAPI.GetComponent<ControllableUnit>(playerInput.unitToMove);
+                // Check if unit can be controlled
+                var unit = SystemAPI.GetComponent<ControllableUnit>(playerInput.controlledUnit);
                 if (unit.playedId != id.playerId)
                 {
                     continue;
                 }
 
-                var path = SystemAPI.GetAspect<PathfinderAspect>(playerInput.unitToMove);
-                path.FindPath(playerInput.from, playerInput.to);
+                if (playerInput.orderType is Order.Attack)
+                {
+                    if (!SystemAPI.HasComponent<ControllableUnit>(playerInput.unitToAttack))
+                    {
+                        continue;
+                    }
+
+                    if (!SystemAPI.HasComponent<UnitInput>(playerInput.controlledUnit))
+                    {
+                        continue;
+                    }
+
+                    ref var unitInput = ref SystemAPI.GetComponentRW<UnitInput>(playerInput.controlledUnit).ValueRW;
+                    unitInput.hasTarget = true;
+                    unitInput.enemy = playerInput.unitToAttack;
+                }
+
+                if (playerInput.orderType is Order.Move)
+                {
+                    if (!SystemAPI.HasComponent<Pathfinder>(playerInput.controlledUnit))
+                    {
+                        continue;
+                    }
+
+                    var path = SystemAPI.GetAspect<PathfinderAspect>(playerInput.controlledUnit);
+                    path.FindPath(playerInput.from, playerInput.to);
+                }
             }
         }
     }

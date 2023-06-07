@@ -1,6 +1,8 @@
-﻿using Unity.Entities;
+﻿using Unity.Collections;
+using Unity.Entities;
 using Unity.Mathematics;
 using Unity.NetCode;
+using UnityEngine.Serialization;
 
 namespace TankEntitiesMultiplayer.Data
 {
@@ -18,10 +20,18 @@ namespace TankEntitiesMultiplayer.Data
         [GhostField] public Entity selectedEntity;
 
 
-        // AI unit moving
-        public InputEvent moveUnit;
+        // AI unit controls
+        public InputEvent order;
+        [GhostField] public Order orderType;
         [GhostField(Quantization = 1000)] public float3 from, to;
-        [GhostField] public Entity unitToMove;
+        [GhostField] public Entity controlledUnit;
+        [GhostField] public Entity unitToAttack;
+    }
+
+    public enum Order
+    {
+        Move,
+        Attack
     }
 
     [GhostComponent]

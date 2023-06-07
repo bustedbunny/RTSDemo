@@ -18,19 +18,31 @@ namespace TankEntitiesMultiplayer.GamePlay
         {
             var delta = SystemAPI.Time.DeltaTime * 1f;
 
-            var colWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
-
-            foreach (var (tank, turret, rotRef, tf) in SystemAPI
-                         .Query<UnitInput, TankWithTurret, RefRW<TankTurretRotation>, LocalTransform>())
+            foreach (var (tankRef, turret, rotRef, tf) in SystemAPI
+                         .Query<RefRW<UnitInput>, TankWithTurret, RefRW<TankTurretRotation>, LocalTransform>())
             {
-                ref readonly var playerInput = ref tank;
-                var raycastInput = new RaycastInput
+                ref var input = ref tankRef.ValueRW;
+
+                if (!input.hasTarget)
                 {
-                    Filter = CollisionFilter.Default,
-                    Start = playerInput.aimOrigin,
-                    End = playerInput.aimOrigin + playerInput.aimDirection * 10000f
-                };
-                if (!colWorld.CastRay(raycastInput, out var targetHit)) continue;
+                    continue;
+                }
+
+                if (input.enemy != Entity.Null)
+                {
+                    if (!SystemAPI.HasComponent<LocalTransform>(input.enemy))
+                    {
+                        input.enemy = Entity.Null;
+                        input.hasTarget = false;
+                        return;
+                    }
+                    else
+                    {
+                        var enemyLt = SystemAPI.GetComponent<LocalTransform>(input.enemy);
+                        input.lookPosition = enemyLt.Position;
+                    }
+                }
+
 
                 ref var turretRot = ref rotRef.ValueRW;
                 ref var turretTf = ref SystemAPI.GetComponentRW<LocalTransform>(turret.turret).ValueRW;
@@ -39,7 +51,7 @@ namespace TankEntitiesMultiplayer.GamePlay
                     var worldMatrix = new LocalToWorld { Value = math.mul(tf.ToMatrix(), turretTf.ToMatrix()) };
                     var tankUp = worldMatrix.Up;
 
-                    var tarDir = targetHit.Position - worldMatrix.Position;
+                    var tarDir = input.lookPosition - worldMatrix.Position;
                     tarDir = ProjectOnPlane(tarDir, tankUp);
                     tarDir = math.normalize(tarDir);
 
@@ -65,7 +77,7 @@ namespace TankEntitiesMultiplayer.GamePlay
 
                     var rotationAxis = worldMatrix.Right;
 
-                    var tarDir = targetHit.Position - worldMatrix.Position;
+                    var tarDir = input.lookPosition - worldMatrix.Position;
                     tarDir = ProjectOnPlane(tarDir, rotationAxis);
                     tarDir = math.normalize(tarDir);
 
